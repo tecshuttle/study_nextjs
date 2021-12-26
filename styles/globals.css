@@ -9,6 +9,12 @@ body {
 a {
   color: inherit;
   text-decoration: none;
+  padding: 0px 1em;
+}
+
+.active {
+  color: deeppink;
+  font-weight: bold;
 }
 
 * {
