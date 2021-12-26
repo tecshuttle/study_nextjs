@@ -5,47 +5,62 @@ import styles from '../styles/Home.module.css'
 import axios from 'axios';
 import { useRouter } from 'next/router'
 import { BrowserRouter, Routes, Route, NavLink, useLocation } from "react-router-dom";
+import { Box, Flex, Divider, Stack } from '@chakra-ui/react'
 
-const Home = () => { return <p>Home</p> }
-const Login = () => { return <p>Login</p> }
-const RecoveryPassword = () => { return <p>RecoveryPassword</p> }
-const NotFound = () => {
-  const router = useRouter();
-  let location = useLocation();
-  //console.log(router);
-  console.log(location);
-  if (location.pathname === '/customer-care') {
-    return ''; // default
-  } else {
-    window.location.href = location.pathname;
-  }
+const Home = (props) => {
+  return (
+    <Box mt="0px">
+      <Box> Name: {props.username} </Box>
+    </Box>
+  )
 }
 
-const SPA = () => {
+const Login = () => { return <p>Login</p> }
+
+const RecoveryPassword = () => { return <p>RecoveryPassword</p> }
+
+const NotFound = () => {
+  let location = useLocation();
+  useEffect(() => {
+    console.log(location.pathname);
+    if (location.pathname !== '/customer-care') {
+      window.location.href = location.pathname;
+    }
+  }, [location]);
+
+  return '';
+}
+
+const SPA = (props) => {
   return (<>
     <BrowserRouter>
-      <ul>
-        {/* 点击跳转 Link  NavLink */}
-        <NavLink to="/spa" activestyle={{ color: '#f66' }}>首页</NavLink> |
-        <NavLink to="/login" activestyle={{ color: '#f66' }}> 登录</NavLink> |
-        <NavLink to="/recovery-password" activestyle={{ color: '#f66' }}> 恢复密码</NavLink> |
-        <NavLink to="/fgm" activestyle={{ color: '#f66' }}> FGM - 模块跳转</NavLink>
-      </ul>
-      <Routes>
-        <Route exact path="/spa" element={<Home />} />
-        <Route exact path="/login" element={<Login />} />
-        <Route exact path="/recovery-password" element={<RecoveryPassword />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+      <Flex>
+        <Stack className={styles.card}>
+          {/* 点击跳转 Link  NavLink */}
+          <NavLink to="/spa" activestyle={{ color: '#f66' }}>用户</NavLink>
+          <NavLink to="/login" activestyle={{ color: '#f66' }}> 登录</NavLink>
+          <NavLink to="/recovery-password" activestyle={{ color: '#f66' }}> 恢复密码</NavLink>
+          <NavLink to="/fgm" activestyle={{ color: '#f66' }}> FGM - 模块跳转</NavLink>
+        </Stack>
+        <Box mt="1em">
+          <Routes>
+            <Route exact path="/spa" element={<Home tags={props.tags} username={props.username} />} />
+            <Route exact path="/login" element={<Login />} />
+            <Route exact path="/recovery-password" element={<RecoveryPassword />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Box>
+      </Flex>
     </BrowserRouter>
   </>)
 }
 
 export default function CC({ tags }) {
+  //console.log('tags: ', tags);
   const [inBrowser, setInBrowser] = useState(false);
   const [userName, setUserName] = useState('noname');
 
-  useEffect((tags) => {
+  useEffect(() => {
     console.log('componentDidMount');
     const name = localStorage.getItem('myCat');
     if (name === null) {
@@ -59,8 +74,6 @@ export default function CC({ tags }) {
   }, []);
 
 
-
-
   return (
     <div className={styles.container}>
       <Head>
@@ -70,24 +83,17 @@ export default function CC({ tags }) {
       </Head>
 
       <main className={styles.main}>
-        <Link href='/'>Link 返回主页</Link>
-        <a href='/'>a 返回主页</a>
-        <h1 className={styles.title}>
-          Customer Care
-        </h1>
-        <div>
+        <Box><p className={styles.normal}><Link href='/'><a>返回主页</a></Link></p></Box>
+        <h1 className={styles.title}>Customer Care</h1>
+
+        <Divider m="2em 0px" />
+
+        <Box>
           {inBrowser && tags.map(item => <span className={styles.tag} key={item.id}>{item.tag}</span>)}
-        </div>
-        <p>
-          Name: {userName}
-        </p>
+        </Box>
 
-        <div>
-          {inBrowser && <SPA />}
-        </div>
-
+        <Box> {inBrowser && <SPA username={userName} />} </Box>
       </main>
-
     </div>
   )
 }
@@ -98,6 +104,8 @@ export async function getServerSideProps(context) {
   tags = await axios.get('http://www.tomtalk.net/tag_api/getListTotal').then(res => {
     return res.data;
   });
+
+  //console.log(tags);
 
   return {
     props: {
