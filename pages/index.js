@@ -4,7 +4,7 @@ import styles from '../styles/Home.module.css'
 import Link from 'next/link'
 import { Divider, Stack } from '@chakra-ui/react'
 
-export default function Home() {
+export default function Home({time}) {
   return (
     <div className={styles.container}>
       <Head>
@@ -23,10 +23,28 @@ export default function Home() {
           <p className={styles.normal}><Link href="/customer-care" ><a>Customer Care</a></Link></p>
 
           <p>2. 普通a标签跳转，全量加载页面内容。</p>
-          <p className={styles.normal}><a href="/customer-care">Customer Care</a></p>
+          <p className={styles.normal}><Link href="/customer-care">Customer Care</Link></p>
         </Stack>
 
+        <h1 className={styles.title}>SSR Caching with Next.js</h1>
+        <Divider m="2em 0px" />
+        <time dateTime={time}>{time}</time>
       </main>
     </div>
   )
+}
+
+export async function getServerSideProps({ req, res }) {
+  res.setHeader(
+    'Cache-Control',
+    'public, s-maxage=10, stale-while-revalidate=59'
+  )
+
+  console.log('getServerSideProps()');
+
+  return {
+    props: {
+      time: new Date().toISOString(),
+    },
+  }
 }
