@@ -2,15 +2,19 @@
   "name": "nextjs-blog",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p 3060",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
+    "@bit/mik-technology.core.theme": "^1.0.12",
     "@chakra-ui/react": "^1.7.3",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
+    "@mik-technology/mik-ui.ui.heading": "^0.0.19",
+    "@mik-technology/mik-ui.ui.text": "^0.0.14",
+    "@tabler/icons": "^1.68.0",
     "axios": "^0.24.0",
     "framer-motion": "^4",
     "next": "12.0.7",

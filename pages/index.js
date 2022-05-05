@@ -1,10 +1,9 @@
 import Head from 'next/head'
-import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import Link from 'next/link'
 import { Divider, Stack } from '@chakra-ui/react'
 
-export default function Home({time}) {
+export default function Home({ time }) {
   return (
     <div className={styles.container}>
       <Head>
@@ -29,6 +28,8 @@ export default function Home({time}) {
         <h1 className={styles.title}>SSR Caching with Next.js</h1>
         <Divider m="2em 0px" />
         <time dateTime={time}>{time}</time>
+        <Divider m="2em 0px" />
+        <p className={styles.normal}><Link href="/call-us">Call Us</Link></p>
       </main>
     </div>
   )
