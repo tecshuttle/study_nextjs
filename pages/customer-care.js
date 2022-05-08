@@ -3,9 +3,9 @@ import Link from 'next/link';
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import axios from 'axios';
-import { useRouter } from 'next/router'
 import { BrowserRouter, Routes, Route, NavLink, useLocation } from "react-router-dom";
 import { Box, Flex, Divider, Stack } from '@chakra-ui/react'
+import Heading from '../components/heading'
 
 const Home = (props) => {
   return (
@@ -22,7 +22,6 @@ const RecoveryPassword = () => { return <p>RecoveryPassword</p> }
 const NotFound = () => {
   let location = useLocation();
   useEffect(() => {
-    console.log(location.pathname);
     if (location.pathname !== '/customer-care') {
       window.location.href = location.pathname;
     }
@@ -34,7 +33,7 @@ const NotFound = () => {
 const SPA = (props) => {
   return (<>
     <BrowserRouter>
-      <Flex>
+      <Flex mt="1em" ml="0.5em">
         <Stack className={styles.card}>
           {/* 点击跳转 Link  NavLink */}
           <NavLink to="/spa" activestyle={{ color: '#f66' }}>用户</NavLink>
@@ -56,12 +55,10 @@ const SPA = (props) => {
 }
 
 export default function CC({ tags }) {
-  //console.log('tags: ', tags);
   const [inBrowser, setInBrowser] = useState(false);
   const [userName, setUserName] = useState('noname');
 
   useEffect(() => {
-    console.log('componentDidMount');
     const name = localStorage.getItem('myCat');
     if (name === null) {
       name = 'Tom'
@@ -84,9 +81,9 @@ export default function CC({ tags }) {
 
       <main className={styles.main}>
         <Box><p className={styles.normal}><Link href='/'><a>返回主页</a></Link></p></Box>
-        <h1 className={styles.title}>Customer Care</h1>
+        <Heading>Customer Care</Heading>
 
-        <Divider m="2em 0px" />
+        <Divider m="1em 0px" />
 
         <Box>
           {inBrowser && tags.map(item => <span className={styles.tag} key={item.id}>{item.tag}</span>)}
@@ -98,14 +95,10 @@ export default function CC({ tags }) {
   )
 }
 
-export async function getServerSideProps(context) {
-  let tags = [1, 2, 3];
-
-  tags = await axios.get('http://www.tomtalk.net/tag_api/getListTotal').then(res => {
+export async function getServerSideProps() {
+  const tags = await axios.get('http://www.tomtalk.net/tag_api/getListTotal').then(res => {
     return res.data;
   });
-
-  //console.log(tags);
 
   return {
     props: {
