@@ -22,10 +22,10 @@ export default function Home({ time }) {
 
         <Stack>
           <p>1. Link组件跳转，保持SPA特性，仅加载增量内容。</p>
-          <p className={styles.normal}><Link href="/customer-care" ><a>Customer Care</a></Link></p>
+          <p className={styles.normal}><Link href="/customer-care" >Customer Care</Link></p>
 
           <p>2. 普通a标签跳转，全量加载页面内容。</p>
-          <p className={styles.normal}><Link href="/customer-care">Customer Care</Link></p>
+          <p className={styles.normal}><a href="/customer-care">Customer Care</a></p>
         </Stack>
 
         <Box h="3em" />
