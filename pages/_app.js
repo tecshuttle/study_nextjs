@@ -1,5 +1,18 @@
 import '../styles/globals.css'
-import { ChakraProvider } from '@chakra-ui/react'
+import { ChakraProvider, extendTheme } from '@chakra-ui/react'
+import theme from "@bit/mik-technology.core.theme";
+
+let body = theme.styles.global.body;
+delete body.height;
+
+const themeMy = extendTheme({
+  ...theme,
+  styles: {
+    global: {
+      body: body // redefine style without height attribute.
+    }
+  }
+})
 
 export function reportWebVitals(metric) {
   console.log(metric);
@@ -7,7 +20,7 @@ export function reportWebVitals(metric) {
 
 function MyApp({ Component, pageProps }) {
   return (
-    <ChakraProvider>
+    <ChakraProvider theme={themeMy}>
       <Component {...pageProps} />
     </ChakraProvider>
   )

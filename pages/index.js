@@ -1,7 +1,8 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import Link from 'next/link'
-import { Divider, Stack } from '@chakra-ui/react'
+import { Divider, Stack, Box } from '@chakra-ui/react'
+import Heading from '../components/heading'
 
 export default function Home({ time }) {
   return (
@@ -13,9 +14,11 @@ export default function Home({ time }) {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}> Learn <a href="https://nextjs.org">Next.js!</a> </h1>
+        <Heading>
+          Learn <a href="https://nextjs.org">Next.js!</a>
+        </Heading>
 
-        <Divider m="2em 0px" />
+        <Divider m="1em 0px" />
 
         <Stack>
           <p>1. Link组件跳转，保持SPA特性，仅加载增量内容。</p>
@@ -25,12 +28,30 @@ export default function Home({ time }) {
           <p className={styles.normal}><Link href="/customer-care">Customer Care</Link></p>
         </Stack>
 
-        <h1 className={styles.title}>SSR Caching with Next.js</h1>
-        <Divider m="2em 0px" />
+        <Box h="3em" />
+
+        <Heading>SSR Caching with Next.js</Heading>
+
+        <Divider m="1em 0px" />
+
         <time dateTime={time}>{time}</time>
-        <Divider m="2em 0px" />
+
+        <Box h="3em" />
+
+        <Heading mt="32px">Reduce vendor.js size</Heading>
+
+        <Divider m="1em 0px" />
+
         <p className={styles.normal}><Link href="/call-us">Call Us</Link></p>
+
+        <Divider m="1em 0px" />
       </main>
+
+      <Heading mt="32px"> Footer Covered on Iphone</Heading>
+
+      <Box h="25em" />
+
+      <Box bg="#f6f6f6" p="0.5em" textAlign='center'>Footer Bar</Box>
     </div>
   )
 }
@@ -40,8 +61,6 @@ export async function getServerSideProps({ req, res }) {
     'Cache-Control',
     'public, s-maxage=10, stale-while-revalidate=59'
   )
-
-  console.log('getServerSideProps()');
 
   return {
     props: {
