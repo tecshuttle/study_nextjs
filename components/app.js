@@ -1,21 +1,10 @@
 import { ChakraProvider, extendTheme } from '@chakra-ui/react'
 import theme from "@bit/mik-technology.core.theme";
-
-let body = theme.styles.global.body;
-delete body.height;
-
-const themeMy = extendTheme({
-  ...theme,
-  styles: {
-    global: {
-      body: body // redefine style without height attribute.
-    }
-  }
-})
+delete theme.styles.global.body.height; // fix the bug: footer hidden on iphone.
 
 function App({ children }) {
   return (
-    <ChakraProvider theme={themeMy}>
+    <ChakraProvider theme={theme}>
       {children}
     </ChakraProvider>
   )
