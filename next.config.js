@@ -7,15 +7,14 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 module.exports = withBundleAnalyzer({
   reactStrictMode: true,
   webpack: (config) => {
-    config.plugins.push(
-      new UnusedWebpackPlugin({
-        directories: [path.join(__dirname, 'pages')], // Source directories
-        exclude: ['*.test.js'],  // Exclude patterns
-        root: __dirname, // Root directory (optional)
-      }),
-    );
-
-    console.log(config);
+    // config.plugins.push(
+    //   new UnusedWebpackPlugin({
+    //     directories: [path.join(__dirname, 'pages')], // Source directories
+    //     exclude: ['*.test.js'],  // Exclude patterns
+    //     root: __dirname, // Root directory (optional)
+    //   }),
+    // );
+    // console.log(config);
     return config
   }
 });

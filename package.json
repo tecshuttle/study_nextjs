@@ -12,6 +12,7 @@
     "@chakra-ui/react": "^1.8.8",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
+    "@mik-technology/mik-ui.ui.button": "^0.0.10",
     "@mik-technology/mik-ui.ui.heading": "^0.0.19",
     "@mik-technology/mik-ui.ui.text": "^0.0.14",
     "@next/bundle-analyzer": "^12.1.6",
