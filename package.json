@@ -14,6 +14,7 @@
     "@emotion/styled": "^11",
     "@mik-technology/mik-ui.ui.heading": "^0.0.19",
     "@mik-technology/mik-ui.ui.text": "^0.0.14",
+    "@next/bundle-analyzer": "^12.1.6",
     "@tabler/icons": "^1.68.0",
     "axios": "^0.24.0",
     "framer-motion": "^4",
