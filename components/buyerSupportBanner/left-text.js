@@ -15,22 +15,11 @@ function LeftText() {
       <Heading style={{ textAlign: 'left', fontFamily: 'Inter', fontWeight: 900 }}>
         Do you have questions about being a seller? We have answers!
       </Heading>
-      <Text
-        tagName={isMobile ? 'C-1' : 'Overall'}
-        style={{ marginTop: '24px', marginBottom: '32px' }}
-      >
-        Click here to get answers to all of youre store front questions, from creating
-        and accessing your dashboard, to setting up and posting projects, and even
-        understanding marketing basics.
+      <Text tagName={isMobile ? 'C-1' : 'Overall'} style={{ marginTop: '24px', marginBottom: '32px' }} >
+        Click here to get answers to all of youre store front questions, from creating and 
+        accessing your dashboard, to setting up and posting projects, and even understanding marketing basics.
       </Text>
-      <Button
-        variant="primary"
-        size="small"
-        w="212px"
-        onClick={() => {
-          router.push('/seller-care');
-        }}
-      >
+      <Button variant="primary" size="small" w="212px" onClick={() => { router.push('/seller-care'); }} >
         <Text tagName="TX6">I NEED SELLER HELP!</Text>
       </Button>
     </Flex>
